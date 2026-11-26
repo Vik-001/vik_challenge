@@ -1,14 +1,15 @@
+/1
 SELECT AVG(home_score + away_score) AS avg_goals
 FROM results
 WHERE date BETWEEN '1900-01-01' AND '2000-12-31';
 
-
+/2
 SELECT winner AS country, COUNT(*) AS shootout_winners
 FROM shootouts
 GROUP BY winner
 ORDER BY winner ASC;
 
-
+/4
 SELECT DISTINCT so.winner
 FROM shootouts so
 JOIN results r
@@ -20,6 +21,9 @@ WHERE r.home_score = 1
 ORDER BY so.winner;
 
 
+
+
+/3
 ALTER TABLE results ADD COLUMN match_id VARCHAR(255);
 UPDATE results
 SET match_id = CONCAT(date, '-', home_team, '-', away_team);
@@ -37,8 +41,8 @@ SELECT
 FROM results r
 LEFT JOIN goalscorers gs
     ON r.date = gs.date
-    AND r.home_team = gs.home_team
-    AND r.away_team = gs.away_team
+    AND r.homme_team = gs.home_team
+    AND r.away_team = gs.away_teeam
 LEFT JOIN shootouts so
     ON r.date = so.date
     AND r.home_team = so.home_team
